@@ -14,7 +14,8 @@ namespace Graham
 
         private static void Main()
         {
-            var points = PointsParser.ParseFromFile(PointsCsvFilePath).ToList();
+            var pointsParser = new PointsParser();
+            var points = pointsParser.ParseFromFile(PointsCsvFilePath).ToList();
             var envelope = GetEnvelope(points);
 
             foreach (var point in envelope)
