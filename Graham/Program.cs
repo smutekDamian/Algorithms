@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Core.Helper;
+using Core.Model;
 
 namespace Graham
 {
@@ -28,32 +30,25 @@ namespace Graham
         private static IEnumerable<Point> GetPointsFromFile(string filePath)
         {
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath);
-            if (File.Exists(path))
+            var fileContent = FileHelper.GetFromFile(path);
+            foreach (var line in fileContent)
             {
-                var fileContent = File.ReadAllLines(filePath);
-                foreach (var line in fileContent)
+                var pointCoordinates = line.Replace(" ", string.Empty).Split(',');
+                if (pointCoordinates.FirstOrDefault(x => x.Equals(string.Empty)) != null)
                 {
-                    var pointCoordinates = line.Replace(" ", string.Empty).Split(',');
-                    if (pointCoordinates.FirstOrDefault(x => x.Equals(string.Empty)) != null)
-                    {
-                        continue;
-                    }
-                    yield return new Point
-                    {
-                        X = double.Parse(pointCoordinates[0], CultureInfo.InvariantCulture),
-                        Y = double.Parse(pointCoordinates[1], CultureInfo.InvariantCulture)
-                    };
+                    continue;
                 }
-            }
-            else
-            {
-                throw new FileNotFoundException();
+                yield return new Point
+                {
+                    X = double.Parse(pointCoordinates[0], CultureInfo.InvariantCulture),
+                    Y = double.Parse(pointCoordinates[1], CultureInfo.InvariantCulture)
+                };
             }
         }
 
         public static IEnumerable<Point> GetEnvelope(IEnumerable<Point> points)
         {
-            points= points.ToList();
+            points = points.ToList();
             var farestDownPoint = GetFarestDownPoint(points);
             var sortedPoints = AngleSort(points, farestDownPoint).ToArray();
 
@@ -101,7 +96,7 @@ namespace Graham
 
         private static double GetDeterminant(Point firstPointOfStretch, Point secondPointOfStretch, Point pointToCalculateDet)
         {
-            var det =  (pointToCalculateDet.X - firstPointOfStretch.X) * (secondPointOfStretch.Y - firstPointOfStretch.Y) -
+            var det = (pointToCalculateDet.X - firstPointOfStretch.X) * (secondPointOfStretch.Y - firstPointOfStretch.Y) -
                    (pointToCalculateDet.Y - firstPointOfStretch.Y) * (secondPointOfStretch.X - firstPointOfStretch.X);
             return det;
         }

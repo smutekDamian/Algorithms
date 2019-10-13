@@ -50,6 +50,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{d1d34a4a-f33f-4a50-ab52-ff5352c3eb50}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Graham\Graham.csproj">
       <Project>{094d736e-95cd-4ff6-b3f5-ff45673992c3}</Project>
       <Name>Graham</Name>

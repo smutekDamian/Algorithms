@@ -1,4 +1,6 @@
-﻿namespace LongestLineInTheSet
+﻿using Core.Model;
+
+namespace LongestLineInTheSet
 {
     public class Program
     {

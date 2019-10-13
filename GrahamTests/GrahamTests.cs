@@ -1,6 +1,7 @@
 ﻿using System.Linq;
-using Graham;
+using Core.Model;
 using NUnit.Framework;
+using static Graham.Program;
 
 namespace GrahamTests
 {
@@ -52,7 +53,7 @@ namespace GrahamTests
             //Arrange
 
             //Act
-            var resultPoint = Program.GetFarestDownPoint(_points);
+            var resultPoint = GetFarestDownPoint(_points);
 
             //Asset
             Assert.IsTrue(resultPoint.X.Equals(-0.3));
@@ -63,11 +64,11 @@ namespace GrahamTests
         public void ShouldSortByAngle()
         {
             //Arrange
-            var p0 = Program.GetFarestDownPoint(_points);
+            var p0 = GetFarestDownPoint(_points);
 
 
             //Act
-            var sorted = Program.AngleSort(_points, p0).ToArray();
+            var sorted = AngleSort(_points, p0).ToArray();
 
             //Assert
             Assert.IsTrue(sorted[0].X.Equals(p0.X));
@@ -172,7 +173,7 @@ namespace GrahamTests
             };
 
             //Act 
-            var envelop = Program.GetEnvelope(points).ToArray();
+            var envelop = GetEnvelope(points).ToArray();
 
             //Assert
             Assert.IsTrue(envelop.Length.Equals(resultEnvelop.Length));
