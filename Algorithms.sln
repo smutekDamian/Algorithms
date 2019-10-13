@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graham", "Graham\Graham.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrahamTests", "GrahamTests\GrahamTests.csproj", "{03F7DA57-3BA2-48EF-A502-CDF9AFD39D04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTests", "CoreTests\CoreTests.csproj", "{BFB58B19-0482-46CE-AB0E-951F39749B01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{03F7DA57-3BA2-48EF-A502-CDF9AFD39D04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03F7DA57-3BA2-48EF-A502-CDF9AFD39D04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03F7DA57-3BA2-48EF-A502-CDF9AFD39D04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFB58B19-0482-46CE-AB0E-951F39749B01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFB58B19-0482-46CE-AB0E-951F39749B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFB58B19-0482-46CE-AB0E-951F39749B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFB58B19-0482-46CE-AB0E-951F39749B01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
