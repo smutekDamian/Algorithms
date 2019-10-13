@@ -1,21 +1,20 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using Core.Helper;
 using Core.Model;
+using Core.Utils;
 
 namespace Graham
 {
-    public class Program
+    public class Graham
     {
         private const string PointsCsvFilePath = @"App_Data\punktyPrzykladowe.csv";
         private const string ResultFilePath = @"App_Data\result.csv";
 
         private static void Main()
         {
-            var points = GetPointsFromFile(PointsCsvFilePath).ToList();
+            var points = PointsParser.ParseFromFile(PointsCsvFilePath).ToList();
             var envelope = GetEnvelope(points);
 
             foreach (var point in envelope)
@@ -27,24 +26,7 @@ namespace Graham
             Console.WriteLine($"Results ready in file {ResultFilePath}");
             Console.ReadKey();
         }
-        private static IEnumerable<Point> GetPointsFromFile(string filePath)
-        {
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filePath);
-            var fileContent = FileHelper.GetFromFile(path);
-            foreach (var line in fileContent)
-            {
-                var pointCoordinates = line.Replace(" ", string.Empty).Split(',');
-                if (pointCoordinates.FirstOrDefault(x => x.Equals(string.Empty)) != null)
-                {
-                    continue;
-                }
-                yield return new Point
-                {
-                    X = double.Parse(pointCoordinates[0], CultureInfo.InvariantCulture),
-                    Y = double.Parse(pointCoordinates[1], CultureInfo.InvariantCulture)
-                };
-            }
-        }
+
 
         public static IEnumerable<Point> GetEnvelope(IEnumerable<Point> points)
         {

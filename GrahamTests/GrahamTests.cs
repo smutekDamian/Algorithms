@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Core.Model;
 using NUnit.Framework;
-using static Graham.Program;
+using static Graham.Graham;
 
 namespace GrahamTests
 {
