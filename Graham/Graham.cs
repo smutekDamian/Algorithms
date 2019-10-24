@@ -18,11 +18,12 @@ namespace Graham
             var points = pointsParser.ParseFromFile(PointsCsvFilePath).ToList();
             var envelope = GetEnvelope(points);
 
-            foreach (var point in envelope)
+            var enumerable = envelope.ToList();
+            foreach (var point in enumerable)
             {
                 Console.WriteLine(point);
             }
-            WriteResultToFile(envelope);
+            pointsParser.WritePointsToFile(enumerable, ResultFilePath);
 
             Console.WriteLine($"Results ready in file {ResultFilePath}");
             Console.ReadKey();
@@ -82,23 +83,6 @@ namespace Graham
             var det = (pointToCalculateDet.X - firstPointOfStretch.X) * (secondPointOfStretch.Y - firstPointOfStretch.Y) -
                    (pointToCalculateDet.Y - firstPointOfStretch.Y) * (secondPointOfStretch.X - firstPointOfStretch.X);
             return det;
-        }
-
-        private static void WriteResultToFile(IEnumerable<Point> envelope)
-        {
-            envelope = envelope.ToList();
-            using (var writer = new StreamWriter(ResultFilePath))
-            {
-                writer.WriteLine("X,Y");
-                writer.Flush();
-                foreach (var point in envelope)
-                {
-                    writer.WriteLine(point.ToString());
-                    writer.Flush();
-                }
-
-                writer.WriteLine(envelope.First().ToString());
-            }
         }
     }
 }

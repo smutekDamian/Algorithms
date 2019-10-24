@@ -7,6 +7,16 @@ namespace Core.Model
         public double X { get; set; }
         public double Y { get; set; }
 
+        public Point()
+        {
+        }
+
+        public Point(double x, double y)
+        {
+            X = x;
+            Y = y;
+        }
+
         public override bool Equals(object obj)
         {
             return obj is Point point && (Math.Abs(point.X - X) < 0.00001 && Math.Abs(point.Y - Y) < 0.00001);

@@ -40,5 +40,22 @@ namespace Core.Utils
                 };
             }
         }
+
+        public void WritePointsToFile(IEnumerable<Point> points, string filePath)
+        {
+            points = points.ToList();
+            using (var writer = new StreamWriter(filePath))
+            {
+                writer.WriteLine("X,Y");
+                writer.Flush();
+                foreach (var point in points)
+                {
+                    writer.WriteLine(point.ToString());
+                    writer.Flush();
+                }
+
+                writer.WriteLine(points.First().ToString());
+            }
+        }
     }
 }
