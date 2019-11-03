@@ -1,4 +1,6 @@
-﻿namespace Huffman
+﻿using System.Collections.Generic;
+
+namespace Huffman
 {
     public class Leaf
     {
@@ -13,6 +15,13 @@
         }
         public string Sequence { get; set; }
         public int Frequency { get; set; }
-        public byte[] PrefixCode { get; set; }
+    }
+
+    public class LeafComparer : IComparer<Leaf>
+    {
+        public int Compare(Leaf x, Leaf y)
+        {
+            return x.Frequency = y.Frequency;
+        }
     }
 }
