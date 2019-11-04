@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HuffmanTreeAnalyzerTests.cs" />
     <Compile Include="HuffmanTreeTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
