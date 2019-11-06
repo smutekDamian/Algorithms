@@ -12,13 +12,13 @@ namespace HuffmanTests
         {
             //Arrange
             const string testText = "TO BE OR NOT TO BE";
-            var oBits = new BitArray(new [] {false, true});
-            var spaceBits = new BitArray(new [] {true, true});
-            var bBits = new BitArray(new [] {false, false, true});
-            var eBits = new BitArray(new [] {true, false, false});
-            var tBits = new BitArray(new [] {true, false, true});
-            var nBits = new BitArray(new [] {false, false, false, false});
-            var rBits = new BitArray(new [] {false, false, false, true});
+            var oBits = new BitArray(new [] {false, false});
+            var spaceBits = new BitArray(new [] {true, false});
+            var bBits = new BitArray(new [] {false, true, false});
+            var eBits = new BitArray(new [] {false, true, true});
+            var tBits = new BitArray(new [] {true, true, true});
+            var nBits = new BitArray(new [] {true, true, false, true});
+            var rBits = new BitArray(new [] {true, true, false, false});
 
 
             var huffmanTree = new HuffmanTree(testText, 1);
@@ -30,13 +30,31 @@ namespace HuffmanTests
 
             //Asset
             Assert.True(map.Count.Equals(7));
-//            Assert.True(map["O"].Equals(oBits));
-//            Assert.True(map[" "].Equals(spaceBits));
-//            Assert.True(map["B"].Equals(bBits));
-//            Assert.True(map["E"].Equals(eBits));
-//            Assert.True(map["T"].Equals(tBits));
-//            Assert.True(map["N"].Equals(nBits));
-//            Assert.True(map["R"].Equals(rBits));
+            Assert.True(AreBitArraysEqual(map["O"], oBits));
+            Assert.True(AreBitArraysEqual(map[" "], spaceBits));
+            Assert.True(AreBitArraysEqual(map["B"], bBits));
+            Assert.True(AreBitArraysEqual(map["E"], eBits));
+            Assert.True(AreBitArraysEqual(map["T"], tBits));
+            Assert.True(AreBitArraysEqual(map["N"], nBits));
+            Assert.True(AreBitArraysEqual(map["R"], rBits));
+        }
+
+        private static bool AreBitArraysEqual(BitArray first, BitArray second)
+        {
+            if (first.Count != second.Count)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < first.Count; i++)
+            {
+                if (first[i] != second[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
