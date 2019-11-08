@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Huffman
 {
+    [Serializable]
     public class Leaf
     {
         public Leaf()

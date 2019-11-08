@@ -8,15 +8,15 @@ namespace Huffman
     public class HuffmanTreeAnalyzer
     {
         private readonly BinaryTree<Leaf> _tree;
-        private readonly Dictionary<string, BitArray> _codes;
+        private readonly Dictionary<string, IEnumerable<bool>> _codes;
 
         public HuffmanTreeAnalyzer(BinaryTree<Leaf> tree)
         {
             _tree = tree;
-            _codes = new Dictionary<string, BitArray>();
+            _codes = new Dictionary<string, IEnumerable<bool>>();
         }
 
-        public Dictionary<string, BitArray> GetByteCodes()
+        public Dictionary<string, IEnumerable<bool>> GetByteCodes()
         {
             GoThroughTreeAndGetCodes(_tree, new List<bool>());
             return _codes;
@@ -26,7 +26,7 @@ namespace Huffman
         {
             if (tree.Left == null && tree.Right == null && tree.Data.Sequence != null)
             {
-                _codes.Add(tree.Data.Sequence, new BitArray(bits.ToArray()));
+                _codes.Add(tree.Data.Sequence, bits);
                 return;
             }
 

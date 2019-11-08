@@ -47,6 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryTreeExtensions.cs" />
+    <Compile Include="Decompressor.cs" />
+    <Compile Include="Compressor.cs" />
+    <Compile Include="HuffmanFile.cs" />
     <Compile Include="HuffmanTree.cs" />
     <Compile Include="HuffmanTreeAnalyzer.cs" />
     <Compile Include="StringExtensions.cs" />
@@ -57,6 +60,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{d1d34a4a-f33f-4a50-ab52-ff5352c3eb50}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
