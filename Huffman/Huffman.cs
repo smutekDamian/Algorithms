@@ -24,7 +24,7 @@ namespace Huffman
                 var compressor = new Compressor(sequenceLength, text);
                 compressor.Compress(outputFilePath);
                 Console.WriteLine($"File {inputFilePath} has been compressed into file {outputFilePath}.");
-                Console.WriteLine($"Compression level is {GetCompressionLevel(inputFilePath, outputFilePath)}");
+                Console.WriteLine($"Compression level is {FileInfoHelper.GetSizeDiffBetweenTwoFiles(inputFilePath, outputFilePath)}");
             }
             else if (type.Equals("d"))
             {
@@ -32,13 +32,6 @@ namespace Huffman
                 FileHelper.WriteTextToFile(outputFilePath, decompressedText);
                 Console.WriteLine($"File {inputFilePath} has been decompressed into file {outputFilePath}");
             }
-        }
-
-        private static double GetCompressionLevel(string originalFilePath, string encodedFilePath)
-        {
-            var encodedSize = (double)new FileInfo(encodedFilePath).Length;
-            var originalSize = (double)new FileInfo(originalFilePath).Length;
-            return (originalSize - encodedSize) / originalSize;
         }
     }
 }
