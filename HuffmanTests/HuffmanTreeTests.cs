@@ -10,7 +10,7 @@ namespace HuffmanTests
         {
             //Arrange
             const string testText = "TO BE OR NOT TO BE";
-            var huffmanTree = new HuffmanTree(testText, 1);
+            var huffmanTree = new HuffmanTree(testText.GetHuffmanLeaves(1));
             
             //Act
             var tree = huffmanTree.Create();

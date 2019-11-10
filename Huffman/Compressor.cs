@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Core.Helper;
-using NGenerics.DataStructures.Trees;
 
 namespace Huffman
 {
@@ -11,14 +10,15 @@ namespace Huffman
         private readonly string _text;
         private readonly int _sequenceLength;
         private readonly Dictionary<string, IEnumerable<bool>> _codes;
-        private readonly BinaryTree<Leaf> _huffmanTree;
+        private readonly IEnumerable<Leaf> _initialLeaves;
 
         public Compressor(int sequenceLength, string text)
         {
             _sequenceLength = sequenceLength;
             _text = text;
-            _huffmanTree = new HuffmanTree(_text, _sequenceLength).Create();
-            var huffmanTreeAnalyzer = new HuffmanTreeAnalyzer(_huffmanTree);
+            _initialLeaves = _text.GetHuffmanLeaves(sequenceLength);
+            var huffmanTree = new HuffmanTree(_initialLeaves).Create();
+            var huffmanTreeAnalyzer = new HuffmanTreeAnalyzer(huffmanTree);
             _codes = huffmanTreeAnalyzer.GetByteCodes();
         }
 
@@ -32,7 +32,7 @@ namespace Huffman
             }
 
             var bitArray = new BitArray(encodedTextBitArray.ToArray());
-            var huffmanFile = new HuffmanFile(bitArray, _huffmanTree);
+            var huffmanFile = new HuffmanFile(bitArray, _initialLeaves);
             FileHelper.SerializeToBinaryFile(filePath, huffmanFile);
         }
     }
