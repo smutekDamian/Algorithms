@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Huffman;
 using Xunit;
@@ -22,7 +21,7 @@ namespace HuffmanTests
             var rBits = new [] {true, true, false, false};
 
 
-            var huffmanTree = new HuffmanTree(testText, 1);
+            var huffmanTree = new HuffmanTree(testText.GetHuffmanLeaves(1));
             var tree = huffmanTree.Create();
             var analyzer = new HuffmanTreeAnalyzer(tree);
 

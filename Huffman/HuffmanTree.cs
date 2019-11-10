@@ -1,17 +1,16 @@
-﻿using NGenerics.DataStructures.Queues;
+﻿using System.Collections.Generic;
+using NGenerics.DataStructures.Queues;
 using NGenerics.DataStructures.Trees;
 
 namespace Huffman
 {
     public class HuffmanTree
     {
-        private readonly string _text;
-        private readonly int _sequenceLength;
+        private readonly IEnumerable<Leaf> _initialLeaves;
 
-        public HuffmanTree(string text, int sequenceLength)
+        public HuffmanTree(IEnumerable<Leaf> initialLeaves)
         {
-            this._text = text;
-            _sequenceLength = sequenceLength;
+            _initialLeaves = initialLeaves;
         }
 
         public BinaryTree<Leaf> Create()
@@ -31,9 +30,8 @@ namespace Huffman
 
         private PriorityQueue<BinaryTree<Leaf>,int> RetrieveInitialLeaves()
         {
-            var leavesFromText = _text.GetHuffmanLeaves(_sequenceLength);
             var queue = new PriorityQueue<BinaryTree<Leaf>, int>(PriorityQueueType.Minimum);
-            foreach (var leaf in leavesFromText)
+            foreach (var leaf in _initialLeaves)
             {
                 queue.Add(new BinaryTree<Leaf>(leaf), leaf.Frequency);
             }

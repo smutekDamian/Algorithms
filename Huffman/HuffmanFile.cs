@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using NGenerics.DataStructures.Trees;
 
 namespace Huffman
@@ -7,13 +8,13 @@ namespace Huffman
     [Serializable]
     public class HuffmanFile
     {
-        public BinaryTree<Leaf> Tree { get; }
+        public IEnumerable<Leaf> InitialLeaves { get; }
         public BitArray CodedBits { get; }
 
-        public HuffmanFile(BitArray codedBits, BinaryTree<Leaf> huffmanTree)
+        public HuffmanFile(BitArray codedBits, IEnumerable<Leaf> leaves)
         {
             CodedBits = codedBits;
-            Tree = huffmanTree;
+            InitialLeaves = leaves;
         }
     }
 }

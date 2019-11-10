@@ -8,7 +8,8 @@ namespace Huffman
         public static string Decompress(string filePath)
         {
             var huffmanFile = FileHelper.DeserializeFromBinaryFile<HuffmanFile>(filePath);
-            var currentPosition = huffmanFile.Tree;
+            var tree = new HuffmanTree(huffmanFile.InitialLeaves).Create();
+            var currentPosition = tree;
             var decodedStringBuilder = new StringBuilder();
 
             foreach (bool bit in huffmanFile.CodedBits)
@@ -31,7 +32,7 @@ namespace Huffman
                 if (currentPosition.Left == null && currentPosition.Right == null)
                 {
                     decodedStringBuilder.Append(currentPosition.Data.Sequence);
-                    currentPosition = huffmanFile.Tree;
+                    currentPosition = tree;
                 }
             }
 
