@@ -4,6 +4,7 @@ using Xunit;
 
 namespace HuffmanTests
 {
+    [Collection("Sequential")]
     public class CompressorTests
     {
         [Fact]

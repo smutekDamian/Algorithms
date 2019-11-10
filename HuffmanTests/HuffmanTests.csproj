@@ -59,10 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompressorTests.cs" />
+    <Compile Include="DecompressionTests.cs" />
     <Compile Include="HuffmanTreeAnalyzerTests.cs" />
     <Compile Include="HuffmanTreeTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestFilePaths.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -82,9 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\seneca.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Data\vuldat.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
