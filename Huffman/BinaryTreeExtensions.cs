@@ -11,7 +11,7 @@ namespace Huffman
                 return 0;
             }
 
-            return Size<T>(tree.Left) + 1 + Size<T>(tree.Right);
+            return Size(tree.Left) + 1 + Size(tree.Right);
         }
     }
 }

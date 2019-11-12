@@ -51,7 +51,7 @@
     <Compile Include="Compressor.cs" />
     <Compile Include="HuffmanFile.cs" />
     <Compile Include="HuffmanTree.cs" />
-    <Compile Include="HuffmanTreeAnalyzer.cs" />
+    <Compile Include="BitCodeMappingService.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Leaf.cs" />

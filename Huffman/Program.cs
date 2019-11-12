@@ -3,7 +3,7 @@ using Core.Helper;
 
 namespace Huffman
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -23,13 +23,13 @@ namespace Huffman
                 var compressor = new Compressor(sequenceLength, textToCompress);
                 compressor.Compress(outputFilePath);
                 Console.WriteLine($"File {inputFilePath} has been compressed into file {outputFilePath}.");
-                var compressionRate = FileInfoHelper.GetSizeDiffBetweenTwoFiles(inputFilePath, outputFilePath);
+                var compressionRate = HuffmanUtilities.CalculateCompressionRate(inputFilePath, outputFilePath);
                 Console.WriteLine($"Compression level is { compressionRate}");
             }
             else if (operationType.Equals("d")) //decompression
             {
-                var decompressedText = Decompressor.Decompress(inputFilePath);
-                FileHelper.WriteTextToFile(outputFilePath, decompressedText);
+                var decompressor = new Decompressor(inputFilePath);
+                decompressor.Decompress(outputFilePath);
                 Console.WriteLine($"File {inputFilePath} has been decompressed into file {outputFilePath}");
             }
         }

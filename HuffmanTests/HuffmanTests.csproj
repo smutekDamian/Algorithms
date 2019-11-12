@@ -59,8 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompressorTests.cs" />
-    <Compile Include="DecompressionTests.cs" />
-    <Compile Include="HuffmanTreeAnalyzerTests.cs" />
+    <Compile Include="DecompressorTests.cs" />
+    <Compile Include="BitCodeMappingServiceTests.cs" />
     <Compile Include="HuffmanTreeTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

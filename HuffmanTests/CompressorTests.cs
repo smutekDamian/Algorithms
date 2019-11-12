@@ -10,7 +10,7 @@ namespace HuffmanTests
         [Fact]
         public void ShouldCompressSenecaWithOneLetter()
         {
-            Assert.True(Compress(1, TestFilePaths.SenecaFilePath, TestFilePaths.SenecaCompressedFilePath).Equals(00.41078400592492414));
+            Assert.True(Compress(1, TestFilePaths.SenecaFilePath, TestFilePaths.SenecaCompressedFilePath).Equals(0.41078400592492414));
         }
 
         [Fact]
@@ -24,8 +24,8 @@ namespace HuffmanTests
             var text = FileHelper.GetTextFromFile(filePath);
             var compressor = new Compressor(sentenceLength, text);
             compressor.Compress(compressedFilePath);
-            var compressionLevel =  FileInfoHelper.GetSizeDiffBetweenTwoFiles(filePath, compressedFilePath);
-            return compressionLevel;
+            var compressionRate =  HuffmanUtilities.CalculateCompressionRate(filePath, compressedFilePath);
+            return compressionRate;
         }
     }
 }

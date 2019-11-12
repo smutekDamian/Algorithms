@@ -15,20 +15,21 @@ namespace Huffman
 
         public BinaryTree<Leaf> Create()
         {
-            var queue = RetrieveInitialLeaves();
+            var queue = RetrieveInitialQueue();
             while (queue.Count > 1)
             {
-                var firstLeaf = queue.Dequeue();
-                var secondLeaf = queue.Dequeue();
-                var newTreeRoot = new Leaf(null, firstLeaf.Data.Frequency + secondLeaf.Data.Frequency);
-                var newTree = new BinaryTree<Leaf>(newTreeRoot) {Left = firstLeaf, Right = secondLeaf};
+                var firstSubTree = queue.Dequeue();
+                var secondSubTree = queue.Dequeue();
+                
+                var newTreeRoot = new Leaf(null, firstSubTree.Data.Frequency + secondSubTree.Data.Frequency);
+                var newTree = new BinaryTree<Leaf>(newTreeRoot) {Left = firstSubTree, Right = secondSubTree};
                 queue.Add(newTree, newTreeRoot.Frequency);
             }
 
             return queue.Dequeue();
         }
 
-        private PriorityQueue<BinaryTree<Leaf>,int> RetrieveInitialLeaves()
+        private PriorityQueue<BinaryTree<Leaf>,int> RetrieveInitialQueue()
         {
             var queue = new PriorityQueue<BinaryTree<Leaf>, int>(PriorityQueueType.Minimum);
             foreach (var leaf in _initialLeaves)

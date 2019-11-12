@@ -1,18 +1,38 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Text;
 using Core.Helper;
+using NGenerics.DataStructures.Trees;
 
 namespace Huffman
 {
-    public static class Decompressor
+    public class Decompressor
     {
-        public static string Decompress(string filePath)
+        private readonly BinaryTree<Leaf> _tree;
+        private readonly BitArray _codedBits;
+        public Decompressor(string inputFilePath)
         {
-            var huffmanFile = FileHelper.DeserializeFromBinaryFile<HuffmanFile>(filePath);
-            var tree = new HuffmanTree(huffmanFile.InitialLeaves).Create();
-            var currentPosition = tree;
+            var huffmanFile = FileHelper.DeserializeFromBinaryFile<HuffmanFile>(inputFilePath);
+            _tree = new HuffmanTree(huffmanFile.InitialLeaves).Create();
+            _codedBits = huffmanFile.CodedBits;
+        }
+
+        public string Decompress()
+        {
+            return ConvertBitsIntoText();
+        }
+
+        public void Decompress(string outputFile)
+        {
+            var decompressedFileContent = Decompress();
+            FileHelper.WriteTextToFile(outputFile, decompressedFileContent);
+        }
+
+        private string ConvertBitsIntoText()
+        {
+            var currentPosition = _tree;
             var decodedStringBuilder = new StringBuilder();
 
-            foreach (bool bit in huffmanFile.CodedBits)
+            foreach (bool bit in _codedBits)
             {
                 if (bit)
                 {
@@ -32,7 +52,7 @@ namespace Huffman
                 if (currentPosition.Left == null && currentPosition.Right == null)
                 {
                     decodedStringBuilder.Append(currentPosition.Data.Sequence);
-                    currentPosition = tree;
+                    currentPosition = _tree;
                 }
             }
 

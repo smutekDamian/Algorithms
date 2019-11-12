@@ -14,7 +14,7 @@ namespace HuffmanTests
             //Assert
 
             //Act
-            var huffmanLeaves = TestString.GetHuffmanLeaves(1).ToList();
+            var huffmanLeaves = TestString.DivideIntoGetHuffmanLeaves(1).ToList();
 
             //Assert
             Assert.True(huffmanLeaves.Count.Equals(11));
@@ -28,7 +28,7 @@ namespace HuffmanTests
             //Assert
 
             //Act
-            var huffmanLeaves = TestString.GetHuffmanLeaves(2).ToList();
+            var huffmanLeaves = TestString.DivideIntoGetHuffmanLeaves(2).ToList();
 
             //Assert
             Assert.True(huffmanLeaves.Count.Equals(9));
@@ -42,7 +42,7 @@ namespace HuffmanTests
             //Assert
 
             //Act
-            var huffmanLeaves = TestString.GetHuffmanLeaves(5).ToList();
+            var huffmanLeaves = TestString.DivideIntoGetHuffmanLeaves(5).ToList();
 
             //Assert
             Assert.True(huffmanLeaves.Count.Equals(6));

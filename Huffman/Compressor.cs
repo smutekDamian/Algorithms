@@ -9,31 +9,37 @@ namespace Huffman
     {
         private readonly string _text;
         private readonly int _sequenceLength;
-        private readonly Dictionary<string, IEnumerable<bool>> _codes;
+        private readonly Dictionary<string, IEnumerable<bool>> _mappings;
         private readonly IEnumerable<Leaf> _initialLeaves;
 
         public Compressor(int sequenceLength, string text)
         {
             _sequenceLength = sequenceLength;
             _text = text;
-            _initialLeaves = _text.GetHuffmanLeaves(sequenceLength);
+            _initialLeaves = _text.DivideIntoGetHuffmanLeaves(sequenceLength);
             var huffmanTree = new HuffmanTree(_initialLeaves).Create();
-            var huffmanTreeAnalyzer = new HuffmanTreeAnalyzer(huffmanTree);
-            _codes = huffmanTreeAnalyzer.GetByteCodes();
+            var bitCodeMappingService = new BitCodeMappingService(huffmanTree);
+            _mappings = bitCodeMappingService.GetSentenceToBitCodesMappings();
         }
 
-        public void Compress(string filePath)
+        public void Compress(string outputFilePath)
+        {
+            var bitArray = ConvertTextToBitArray();
+            var huffmanFile = new HuffmanFile(bitArray, _initialLeaves);
+            FileHelper.SerializeToBinaryFile(outputFilePath, huffmanFile);
+        }
+
+        private BitArray ConvertTextToBitArray()
         {
             var encodedTextBitArray = new List<bool>();
             for (var i = 0; i < _text.Length; i += _sequenceLength)
             {
                 var sequence = _text.Substring(i, Math.Min(_sequenceLength, _text.Length - i));
-                encodedTextBitArray.AddRange(_codes[sequence]);
+                encodedTextBitArray.AddRange(_mappings[sequence]);
             }
 
             var bitArray = new BitArray(encodedTextBitArray.ToArray());
-            var huffmanFile = new HuffmanFile(bitArray, _initialLeaves);
-            FileHelper.SerializeToBinaryFile(filePath, huffmanFile);
+            return bitArray;
         }
     }
 }

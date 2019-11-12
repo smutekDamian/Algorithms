@@ -5,7 +5,7 @@ using Xunit;
 
 namespace HuffmanTests
 {
-    public class HuffmanTreeAnalyzerTests
+    public class BitCodeMappingServiceTests
     {
         [Fact]
         public void ShouldReturnSequenceToBytesCodeMap()
@@ -21,14 +21,14 @@ namespace HuffmanTests
             var rBits = new [] {true, true, false, false};
 
 
-            var huffmanTree = new HuffmanTree(testText.GetHuffmanLeaves(1));
+            var huffmanTree = new HuffmanTree(testText.DivideIntoGetHuffmanLeaves(1));
             var tree = huffmanTree.Create();
-            var analyzer = new HuffmanTreeAnalyzer(tree);
+            var analyzer = new BitCodeMappingService(tree);
 
             //Act
-            Dictionary<string, IEnumerable<bool>> map = analyzer.GetByteCodes();
+            Dictionary<string, IEnumerable<bool>> map = analyzer.GetSentenceToBitCodesMappings();
 
-            //Asset
+            //Assert
             Assert.True(map.Count.Equals(7));
             Assert.True(AreBitArraysEqual(map["O"], oBits));
             Assert.True(AreBitArraysEqual(map[" "], spaceBits));

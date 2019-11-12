@@ -6,7 +6,7 @@ namespace Huffman
 {
     public static class StringExtensions
     {
-        public static IEnumerable<Leaf> GetHuffmanLeaves(this string inputString, int sequenceLength)
+        public static IEnumerable<Leaf> DivideIntoGetHuffmanLeaves(this string inputString, int sequenceLength)
         {
             var inputStringLength = inputString.Length;
             var leaves = new List<Leaf>();
