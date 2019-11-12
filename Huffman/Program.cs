@@ -1,10 +1,9 @@
 ﻿using System;
-using System.IO;
 using Core.Helper;
 
 namespace Huffman
 {
-    public class Huffman
+    public class Program
     {
         public static void Main(string[] args)
         {
@@ -15,18 +14,19 @@ namespace Huffman
 
             var inputFilePath = args[1];
             var outputFilePath = args[2];
-            var type = args[0].ToLower();
+            var operationType = args[0].ToLower();
 
-            if (type.Equals("c"))
+            if (operationType.Equals("c")) //compression
             {
                 var sequenceLength = int.Parse(args[3]);
-                var text = FileHelper.GetTextFromFile(inputFilePath);
-                var compressor = new Compressor(sequenceLength, text);
+                var textToCompress = FileHelper.GetTextFromFile(inputFilePath);
+                var compressor = new Compressor(sequenceLength, textToCompress);
                 compressor.Compress(outputFilePath);
                 Console.WriteLine($"File {inputFilePath} has been compressed into file {outputFilePath}.");
-                Console.WriteLine($"Compression level is {FileInfoHelper.GetSizeDiffBetweenTwoFiles(inputFilePath, outputFilePath)}");
+                var compressionRate = FileInfoHelper.GetSizeDiffBetweenTwoFiles(inputFilePath, outputFilePath);
+                Console.WriteLine($"Compression level is { compressionRate}");
             }
-            else if (type.Equals("d"))
+            else if (operationType.Equals("d")) //decompression
             {
                 var decompressedText = Decompressor.Decompress(inputFilePath);
                 FileHelper.WriteTextToFile(outputFilePath, decompressedText);

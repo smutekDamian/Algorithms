@@ -53,7 +53,7 @@
     <Compile Include="HuffmanTree.cs" />
     <Compile Include="HuffmanTreeAnalyzer.cs" />
     <Compile Include="StringExtensions.cs" />
-    <Compile Include="Huffman.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Leaf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
